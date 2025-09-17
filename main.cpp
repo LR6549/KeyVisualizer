@@ -91,6 +91,10 @@ std::vector<Highlight> highlightVectorMouse;
 
 #include "sfmlKeyMaps.hpp"
 
+#include "windows.h"
+#include <thread>
+#include <mutex> //* Thread secure push back
+std::mutex highlightMutex;
 
 json loadJson() {
     std::ifstream inputFile(path + "data/config/highlightConfig.json");
@@ -271,6 +275,91 @@ void checkKeys() {
     }
 }
 
+HHOOK mouseHook;
+
+LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode == HC_ACTION) {
+        MSLLHOOKSTRUCT* mouseStruct = (MSLLHOOKSTRUCT*)lParam;
+
+        if (wParam == WM_MOUSEWHEEL) {
+            short delta = GET_WHEEL_DELTA_WPARAM(mouseStruct->mouseData);
+            if (delta > 0) {
+                // WheelUp
+                Highlight h{
+                    &rTextureMouse,
+                    highlightConfig["mouse"]["keyMap"]["WheelUp"]["texture"].get<std::string>(),
+                    highlightConfig["mouse"]["keyMap"]["WheelUp"]["position"].get<std::vector<float>>(),
+                    highlightConfig["DelayFrames"].get<int>()
+                };
+                {
+                    std::lock_guard<std::mutex> lock(highlightMutex);
+                    highlightVectorMouse.push_back(h);
+                }
+            } else {
+                // WheelDown
+                Highlight h{
+                    &rTextureMouse,
+                    highlightConfig["mouse"]["keyMap"]["WheelDown"]["texture"].get<std::string>(),
+                    highlightConfig["mouse"]["keyMap"]["WheelDown"]["position"].get<std::vector<float>>(),
+                    highlightConfig["DelayFrames"].get<int>()
+                };
+                {
+                    std::lock_guard<std::mutex> lock(highlightMutex);
+                    highlightVectorMouse.push_back(h);
+                }
+            }
+        } else if (wParam == WM_MOUSEHWHEEL) {
+            short delta = GET_WHEEL_DELTA_WPARAM(mouseStruct->mouseData);
+            if (delta > 0) {
+                // WheelRight
+                Highlight h{
+                    &rTextureMouse,
+                    highlightConfig["mouse"]["keyMap"]["WheelRight"]["texture"].get<std::string>(),
+                    highlightConfig["mouse"]["keyMap"]["WheelRight"]["position"].get<std::vector<float>>(),
+                    highlightConfig["DelayFrames"].get<int>()
+                };
+                {
+                    std::lock_guard<std::mutex> lock(highlightMutex);
+                    highlightVectorMouse.push_back(h);
+                }
+            } else {
+                // WheelLeft
+                Highlight h{
+                    &rTextureMouse,
+                    highlightConfig["mouse"]["keyMap"]["WheelLeft"]["texture"].get<std::string>(),
+                    highlightConfig["mouse"]["keyMap"]["WheelLeft"]["position"].get<std::vector<float>>(),
+                    highlightConfig["DelayFrames"].get<int>()
+                };
+                {
+                    std::lock_guard<std::mutex> lock(highlightMutex);
+                    highlightVectorMouse.push_back(h);
+                }
+            }
+        }
+    }
+
+    return CallNextHookEx(mouseHook, nCode, wParam, lParam);
+}
+
+void mouseHookThread(bool* runningFlag) {
+    mouseHook = SetWindowsHookEx(WH_MOUSE_LL, LowLevelMouseProc, NULL, 0);
+    if (!mouseHook) {
+        std::cerr << "Hook konnte nicht gesetzt werden!\n";
+        return;
+    }
+
+    MSG msg;
+    while (*runningFlag) {
+        while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+        Sleep(10);
+    }
+
+    UnhookWindowsHookEx(mouseHook);
+}
+
 int main (int argc, char* argv[]) {
     loadTextures();
 
@@ -314,6 +403,8 @@ int main (int argc, char* argv[]) {
     rTextureSettings.setSmooth(true);
 
     bool running = true;
+    std::thread t(mouseHookThread, &running);
+    t.detach();
 
     while (running) {
 
