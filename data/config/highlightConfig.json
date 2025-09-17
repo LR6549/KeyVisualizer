@@ -1,0 +1,66 @@
+{
+    "DelayFrames":5,
+
+    "settings": {
+        "windowSize":[280, 395]
+    },
+
+    "keyboard":{
+        "show":true,
+        "windowSize":[778, 395],
+
+        "keyMap": {
+            "A": {
+                "texture":"normalKey",
+                "position":[0, 0]
+            },
+            "B" : {
+                "texture":"normalKey",
+                "position":[0, 0]
+            }
+        }
+    },
+    "mouse": {
+        "show": true,
+        "windowSize":[270, 395],
+
+        "keyMap": {
+            "Left": {
+                "texture": "left",
+                "position": [82, 25]
+            },
+            "Right": {
+                "texture": "right",
+                "position": [188, 22]
+            },
+            "Extra2": {
+                "texture": "Mouse4",
+                "position": [77, 60]
+            },
+            "Extra1": {
+                "texture": "Mouse5",
+                "position": [70, 94]
+            },
+            "WheelUp": {
+                "texture": "wheelUp",
+                "position": [157, 76]
+            },
+            "Middle": {
+                "texture": "wheelMiddle",
+                "position": [157, 95]
+            },
+            "WheelDown": {
+                "texture": "wheelDown",
+                "position": [157, 113]
+            },
+            "WheelLeft": {
+                "texture": "wheelLeft",
+                "position": [150, 101]
+            },
+            "WheelRight": {
+                "texture": "wheelRight",
+                "position": [182, 101]
+            }
+        }
+    }
+}
