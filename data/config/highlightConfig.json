@@ -2,27 +2,128 @@
     "DelayFrames":5,
 
     "settings": {
-        "windowSize":[280, 395]
+        "windowSize":[280, 395],
+        "backgroundTextureSize": [560, 790]
     },
 
-    "keyboard":{
-        "show":true,
-        "windowSize":[778, 395],
+    "keyboard": {
+        "show": true,
+        "windowSize": [778, 395],
+        "backgroundTextureSize": [778, 395],
 
         "keyMap": {
-            "A": {
-                "texture":"normalKey",
-                "position":[0, 0]
-            },
-            "B" : {
-                "texture":"normalKey",
-                "position":[0, 0]
-            }
+            "Add":         { "texture": "numpEnter+Key", "position": [700, 104] },
+            "Numpad0":     { "texture": "nump0Key",      "position": [608, 197] },
+            "Enter":       { "texture": "enterKey",      "position": [449, 104] },
+            "RShift":      { "texture": "rightShiftKey", "position": [412, 166] },
+            "Space":       { "texture": "spaceKey",      "position": [150, 197] },
+            "Tab":         { "texture": "tabKey",        "position": [34, 104] },
+            "Backspace":   { "texture": "backspace",     "position": [435, 74] },
+            "RControl":    { "texture": "ctrlShiftKey",  "position": [459, 197] },
+            "LControl":    { "texture": "ctrlShiftKey",  "position": [34, 197] },
+            "LShift":      { "texture": "ctrlShiftKey",  "position": [34, 166] },
+            "Menu":        { "texture": "ctrlShiftKey",  "position": [421, 197] },
+            "Unknown":     { "texture": "ctrlShiftKey",  "position": [382, 197] }, 
+            "RAlt":        { "texture": "ctrlShiftKey",  "position": [343, 197] },
+            "LAlt":        { "texture": "ctrlShiftKey",  "position": [112, 197] },
+            "LSystem":     { "texture": "ctrlShiftKey",  "position": [73, 197] },
+
+            "Backslash": { "texture": "normalKey", "position": [34, 74] },
+            "Num1": { "texture": "normalKey", "position": [65, 74] },
+            "Num2": { "texture": "normalKey", "position": [96, 74] },
+            "Num3": { "texture": "normalKey", "position": [127, 74] },
+            "Num4": { "texture": "normalKey", "position": [158, 74] },
+            "Num5": { "texture": "normalKey", "position": [189, 74] },
+            "Num6": { "texture": "normalKey", "position": [220, 74] },
+            "Num7": { "texture": "normalKey", "position": [251, 74] },
+            "Num8": { "texture": "normalKey", "position": [282, 74] },
+            "Num9": { "texture": "normalKey", "position": [313, 74] },
+            "Num0": { "texture": "normalKey", "position": [344, 74] },
+            "LBracket":    { "texture": "normalKey", "position": [375, 74] },
+            "RBracket":    { "texture": "normalKey", "position": [406, 74] },
+
+            "Q": { "texture": "normalKey", "position": [80, 104] },
+            "W": { "texture": "normalKey", "position": [111, 104] },
+            "E": { "texture": "normalKey", "position": [142, 104] },
+            "R": { "texture": "normalKey", "position": [173, 104] },
+            "T": { "texture": "normalKey", "position": [204, 104] },
+            "Z": { "texture": "normalKey", "position": [235, 104] },
+            "U": { "texture": "normalKey", "position": [266, 104] },
+            "I": { "texture": "normalKey", "position": [297, 104] },
+            "O": { "texture": "normalKey", "position": [328, 104] },
+            "P": { "texture": "normalKey", "position": [359, 104] },
+            "Semicolon": { "texture": "normalKey", "position": [390, 104] },
+            "Equal": { "texture": "normalKey", "position": [421, 104] },
+
+            "A": { "texture": "normalKey", "position": [89, 135] },
+            "S": { "texture": "normalKey", "position": [120, 135] },
+            "D": { "texture": "normalKey", "position": [151, 135] },
+            "F": { "texture": "normalKey", "position": [182, 135] },
+            "G": { "texture": "normalKey", "position": [213, 135] },
+            "H": { "texture": "normalKey", "position": [244, 135] },
+            "J": { "texture": "normalKey", "position": [275, 135] },
+            "K": { "texture": "normalKey", "position": [306, 135] },
+            "L": { "texture": "normalKey", "position": [337, 135] },
+            "Grave": { "texture": "normalKey", "position": [368, 135] },
+            "Apostrophe": { "texture": "normalKey", "position": [399, 135] },
+            "Slash": { "texture": "normalKey", "position": [430, 135] },
+
+            "Y": { "texture": "normalKey", "position": [104, 166] },
+            "X": { "texture": "normalKey", "position": [135, 166] },
+            "C": { "texture": "normalKey", "position": [166, 166] },
+            "V": { "texture": "normalKey", "position": [196, 166] },
+            "B": { "texture": "normalKey", "position": [227, 166] },
+            "N": { "texture": "normalKey", "position": [258, 166] },
+            "M": { "texture": "normalKey", "position": [289, 166] },
+            "Comma": { "texture": "normalKey", "position": [319, 166] },
+            "Period": { "texture": "normalKey", "position": [350, 166] },
+            "Hyphen": { "texture": "normalKey", "position": [379, 166] },
+
+            "Escape": { "texture": "normalKey", "position": [34, 34] },
+            "F1": { "texture": "normalKey", "position": [96, 34] },
+            "F2": { "texture": "normalKey", "position": [127, 34] },
+            "F3": { "texture": "normalKey", "position": [158, 34] },
+            "F4": { "texture": "normalKey", "position": [188, 34] },
+            "F5": { "texture": "normalKey", "position": [235, 34] },
+            "F6": { "texture": "normalKey", "position": [266, 34] },
+            "F7": { "texture": "normalKey", "position": [296, 34] },
+            "F8": { "texture": "normalKey", "position": [327, 34] },
+            "F9": { "texture": "normalKey", "position": [374, 34] },
+            "F10": { "texture": "normalKey", "position": [405, 34] },
+            "F11": { "texture": "normalKey", "position": [435, 34] },
+            "F12": { "texture": "normalKey", "position": [466, 34] },
+
+            "Pause":       { "texture": "normalKey", "position": [568, 34] },
+            "Insert":      { "texture": "normalKey", "position": [507, 74] },
+            "Home":        { "texture": "normalKey", "position": [537, 74] },
+            "PageUp":      { "texture": "normalKey", "position": [568, 74] },
+            "Delete":      { "texture": "normalKey", "position": [507, 104] },
+            "End":         { "texture": "normalKey", "position": [537, 104] },
+            "PageDown":    { "texture": "normalKey", "position": [568, 104] },
+
+            "Up":    { "texture": "normalKey", "position": [537, 166] },
+            "Down":  { "texture": "normalKey", "position": [537, 197] },
+            "Left":  { "texture": "normalKey", "position": [507, 197] },
+            "Right": { "texture": "normalKey", "position": [568, 197] },
+
+            "Divide":  { "texture": "normalKey", "position": [638, 74] },
+            "Multiply":{ "texture": "normalKey", "position": [669, 74] },
+            "Subtract":{ "texture": "normalKey", "position": [700, 74] },
+            "Numpad7": { "texture": "normalKey", "position": [608, 104] },
+            "Numpad8": { "texture": "normalKey", "position": [638, 104] },
+            "Numpad9": { "texture": "normalKey", "position": [669, 104] },
+            "Numpad4": { "texture": "normalKey", "position": [608, 135] },
+            "Numpad5": { "texture": "normalKey", "position": [638, 135] },
+            "Numpad6": { "texture": "normalKey", "position": [669, 135] },
+            "Numpad1": { "texture": "normalKey", "position": [608, 166] },
+            "Numpad2": { "texture": "normalKey", "position": [638, 166] },
+            "Numpad3": { "texture": "normalKey", "position": [669, 166] }
         }
     },
     "mouse": {
         "show": true,
         "windowSize":[270, 395],
+        "backgroundTextureSize": [325, 432],
 
         "keyMap": {
             "Left": {

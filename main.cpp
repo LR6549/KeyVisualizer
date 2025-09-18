@@ -15,9 +15,9 @@ sf::RenderWindow windowSettings;
 sf::RenderWindow windowKeyboard;
 sf::RenderWindow windowMouse;
 
-sf::RenderTexture rTextureSettings({280, 395});
-sf::RenderTexture rTextureKeyboard({778, 395});
-sf::RenderTexture rTextureMouse({325, 432});
+sf::RenderTexture rTextureSettings;
+sf::RenderTexture rTextureKeyboard;
+sf::RenderTexture rTextureMouse;
 
 enum class DRAG {
     NONE,
@@ -170,7 +170,7 @@ void renderRenderTexturesAndWindow() {
     sf::Texture tempText = textureMap.at("empty");
     sf::Sprite tempSprite(tempText);
 
-    if (windowKeyboard.isOpen()) {
+    if (windowMouse.isOpen()) {
         //* Mouse Content
         tempText = textureMap.at("backgroundM");
         tempSprite.setTexture(tempText, true);
@@ -200,10 +200,14 @@ void renderRenderTexturesAndWindow() {
         windowMouse.display();
     }
     
+    tempSprite.setScale({1, 1});
     if (windowKeyboard.isOpen()) {
         //* Keyboard Content
         tempText = textureMap.at("backgroundK");
         tempSprite.setTexture(tempText, true);
+        auto texSize = textureMap["backgroundK"].getSize();
+        auto rtSize  = rTextureKeyboard.getSize();
+
         rTextureKeyboard.draw(tempSprite);
 
         //* Rendering keyboard key Highlight
@@ -216,6 +220,7 @@ void renderRenderTexturesAndWindow() {
             }
         }
 
+
         rTextureKeyboard.display();
         tempText = rTextureKeyboard.getTexture();
         tempSprite.setTexture(tempText, true);
@@ -225,11 +230,13 @@ void renderRenderTexturesAndWindow() {
             static_cast<float>(windowKeyboard.getSize().y) / tempText.getSize().y}
         );
 
+
         windowKeyboard.clear();
         windowKeyboard.draw(tempSprite);
         windowKeyboard.display();
     }
 
+    tempSprite.setScale({1, 1});
     //* Settings Content
     rTextureSettings.display();
     tempText = rTextureSettings.getTexture();
@@ -248,14 +255,17 @@ void renderRenderTexturesAndWindow() {
 void checkKeys() {
     //* Keyboard:
     if (windowKeyboard.isOpen()) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-            Highlight h{
-                &rTextureKeyboard,
-                highlightConfig["keyboard"]["keyMap"]["A"]["texture"].get<std::string>(),
-                highlightConfig["keyboard"]["keyMap"]["A"]["position"].get<std::vector<float>>(),
-                highlightConfig["DelayFrames"].get<int>()
-            };
-            highlightVectorKeyboard.push_back(h);
+        for (std::string keyName : keyNames) {
+            if (sf::Keyboard::isKeyPressed(keyMap.at(keyName))) {
+                std::cout << keyName << std::endl;
+                Highlight h{
+                    &rTextureKeyboard,
+                    highlightConfig["keyboard"]["keyMap"][keyName]["texture"].get<std::string>(),
+                    highlightConfig["keyboard"]["keyMap"][keyName]["position"].get<std::vector<float>>(),
+                    highlightConfig["DelayFrames"].get<int>()
+                };
+                highlightVectorKeyboard.push_back(h);
+            }
         }
     }
 
@@ -366,16 +376,28 @@ int main (int argc, char* argv[]) {
     highlightConfig = loadJson();
 
     //* Window Confings
+    rTextureSettings = sf::RenderTexture(
+        {highlightConfig["settings"]["backgroundTextureSize"][0].get<unsigned int>(),
+        highlightConfig["settings"]["backgroundTextureSize"][1].get<unsigned int>()}
+    );
     sf::VideoMode videoModeSettings(
         {highlightConfig["settings"]["windowSize"][0].get<unsigned int>(),
         highlightConfig["settings"]["windowSize"][1].get<unsigned int>()}
     );
 
+    rTextureKeyboard = sf::RenderTexture(
+        {highlightConfig["keyboard"]["backgroundTextureSize"][0].get<unsigned int>(),
+        highlightConfig["keyboard"]["backgroundTextureSize"][1].get<unsigned int>()}
+    );
     sf::VideoMode videoModeKeyboard(
         {highlightConfig["keyboard"]["windowSize"][0].get<unsigned int>(),
         highlightConfig["keyboard"]["windowSize"][1].get<unsigned int>()}
     );
     
+    rTextureMouse = sf::RenderTexture(
+        {highlightConfig["mouse"]["backgroundTextureSize"][0].get<unsigned int>(),
+        highlightConfig["mouse"]["backgroundTextureSize"][1].get<unsigned int>()}
+    );
     sf::VideoMode videoModeMouse(
         {highlightConfig["mouse"]["windowSize"][0].get<unsigned int>(),
         highlightConfig["mouse"]["windowSize"][1].get<unsigned int>()}
