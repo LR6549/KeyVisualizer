@@ -26,7 +26,7 @@ This project relies on the following libraries:
 
 ## JSON Configuration
 
-`highlightConfig.json` contains settings for:
+`highlightConfig.json` contains settings for:    (Soon changeable via settings window)
 
 - Window size and visibility.
 - Keyboard and mouse key mappings.
