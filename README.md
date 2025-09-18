@@ -20,7 +20,7 @@ This project relies on the following libraries:
 
 - [SFML 3.0](https://www.sfml-dev.org/) — for windowing, graphics, audio, and input handling.
 - [nlohmann/json](https://github.com/nlohmann/json) — for reading JSON configuration files.
-
+- [win32](https://learn.microsoft.com/en-us/windows/win32/learnwin32/learn-to-program-for-windows) - for a threaded Mouse Wheel Hook.
 
 ---
 
